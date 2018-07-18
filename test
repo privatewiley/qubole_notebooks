@@ -1,0 +1,264 @@
+{
+  "paragraphs": [
+    {
+      "text": "// IMPORTS AND AWS KEYS\nimport org.apache.spark.sql.functions._\nimport spark.sqlContext.implicits._\nimport org.apache.spark.sql.expressions.Window\nimport java.sql.Timestamp\nimport java.time.format.DateTimeFormatter\nimport org.apache.spark.sql.SparkSession\n\nimport org.apache.spark.sql.expressions.Window\nimport org.apache.spark.sql.functions.{when, _}\nimport org.apache.spark.sql._\n\nimport java.time.{Instant, LocalDate, LocalDateTime, ZoneId, ZoneOffset}\nimport java.time.ZonedDateTime\nimport java.time.temporal.ChronoUnit\nimport java.text.SimpleDateFormat\n// blah\nimport org.apache.spark.sql.{DataFrame, SaveMode, SparkSession}",
+      "user": "yooslee@homeaway.com",
+      "dateUpdated": "Jul 18, 2018 11:42:34 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "version": "v0",
+      "jobName": "paragraph_1512164421033_1854117500",
+      "id": "20171201-214021_48294982_q_CQYN51J1CG1516752318",
+      "result": {
+        "code": "ERROR",
+        "type": "TEXT",
+        "msg": "MetaException(message:Could not connect to meta store using any of the URIs provided. Most recent failure: org.apache.thrift.transport.TTransportException: java.net.ConnectException: Connection timed out (Connection timed out)\n\tat org.apache.thrift.transport.TSocket.open(TSocket.java:226)\n\tat org.apache.hadoop.hive.metastore.HiveMetaStoreClient.open(HiveMetaStoreClient.java:420)\n\tat org.apache.hadoop.hive.metastore.HiveMetaStoreClient.\u003cinit\u003e(HiveMetaStoreClient.java:236)\n\tat org.apache.hadoop.hive.ql.metadata.SessionHiveMetaStoreClient.\u003cinit\u003e(SessionHiveMetaStoreClient.java:74)\n\tat sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)\n\tat sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)\n\tat sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)\n\tat java.lang.reflect.Constructor.newInstance(Constructor.java:423)\n\tat org.apache.hadoop.hive.metastore.MetaStoreUtils.newInstance(MetaStoreUtils.java:1527)\n\tat org.apache.hadoop.hive.metastore.RetryingMetaStoreClient.\u003cinit\u003e(RetryingMetaStoreClient.java:88)\n\tat org.apache.hadoop.hive.metastore.RetryingMetaStoreClient.getProxy(RetryingMetaStoreClient.java:134)\n\tat org.apache.hadoop.hive.metastore.RetryingMetaStoreClient.getProxy(RetryingMetaStoreClient.java:106)\n\tat org.apache.hadoop.hive.ql.metadata.Hive.createMetaStoreClient(Hive.java:4067)\n\tat org.apache.hadoop.hive.ql.metadata.Hive.getMSC(Hive.java:4088)\n\tat org.apache.hadoop.hive.ql.session.SessionState.start(SessionState.java:708)\n\tat org.apache.spark.sql.hive.client.HiveClientImpl.\u003cinit\u003e(HiveClientImpl.scala:193)\n\tat sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)\n\tat sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)\n\tat sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)\n\tat java.lang.reflect.Constructor.newInstance(Constructor.java:423)\n\tat org.apache.spark.sql.hive.client.IsolatedClientLoader.createClient(IsolatedClientLoader.scala:264)\n\tat org.apache.spark.sql.hive.HiveUtils$.newClientForMetadata(HiveUtils.scala:503)\n\tat org.apache.spark.sql.hive.HiveUtils$.newClientForMetadata(HiveUtils.scala:407)\n\tat org.apache.spark.sql.hive.HiveExternalCatalog.client$lzycompute(HiveExternalCatalog.scala:66)\n\tat org.apache.spark.sql.hive.HiveExternalCatalog.client(HiveExternalCatalog.scala:65)\n\tat org.apache.spark.sql.hive.HiveExternalCatalog$$anonfun$databaseExists$1.apply$mcZ$sp(HiveExternalCatalog.scala:194)\n\tat org.apache.spark.sql.hive.HiveExternalCatalog$$anonfun$databaseExists$1.apply(HiveExternalCatalog.scala:194)\n\tat org.apache.spark.sql.hive.HiveExternalCatalog$$anonfun$databaseExists$1.apply(HiveExternalCatalog.scala:194)\n\tat org.apache.spark.sql.hive.HiveExternalCatalog.withClient(HiveExternalCatalog.scala:97)\n\tat org.apache.spark.sql.hive.HiveExternalCatalog.databaseExists(HiveExternalCatalog.scala:193)\n\tat org.apache.spark.sql.internal.SharedState.externalCatalog$lzycompute(SharedState.scala:105)\n\tat org.apache.spark.sql.internal.SharedState.externalCatalog(SharedState.scala:93)\n\tat org.apache.spark.sql.hive.HiveSessionStateBuilder.externalCatalog(HiveSessionStateBuilder.scala:39)\n\tat org.apache.spark.sql.hive.HiveSessionStateBuilder.catalog$lzycompute(HiveSessionStateBuilder.scala:54)\n\tat org.apache.spark.sql.hive.HiveSessionStateBuilder.catalog(HiveSessionStateBuilder.scala:52)\n\tat org.apache.spark.sql.hive.HiveSessionStateBuilder.catalog(HiveSessionStateBuilder.scala:35)\n\tat org.apache.spark.sql.internal.BaseSessionStateBuilder.build(BaseSessionStateBuilder.scala:289)\n\tat org.apache.spark.sql.SparkSession$.org$apache$spark$sql$SparkSession$$instantiateSessionState(SparkSession.scala:1086)\n\tat org.apache.spark.sql.SparkSession$$anonfun$sessionState$2.apply(SparkSession.scala:133)\n\tat org.apache.spark.sql.SparkSession$$anonfun$sessionState$2.apply(SparkSession.scala:133)\n\tat scala.Option.getOrElse(Option.scala:121)\n\tat org.apache.spark.sql.SparkSession.sessionState$lzycompute(SparkSession.scala:132)\n\tat org.apache.spark.sql.SparkSession.sessionState(SparkSession.scala:129)\n\tat org.apache.spark.sql.SparkSession$Builder$$anonfun$getOrCreate$5.apply(SparkSession.scala:958)\n\tat org.apache.spark.sql.SparkSession$Builder$$anonfun$getOrCreate$5.apply(SparkSession.scala:958)\n\tat scala.collection.mutable.HashMap$$anonfun$foreach$1.apply(HashMap.scala:99)\n\tat scala.collection.mutable.HashMap$$anonfun$foreach$1.apply(HashMap.scala:99)\n\tat scala.collection.mutable.HashTable$class.foreachEntry(HashTable.scala:230)\n\tat scala.collection.mutable.HashMap.foreachEntry(HashMap.scala:40)\n\tat scala.collection.mutable.HashMap.foreach(HashMap.scala:99)\n\tat org.apache.spark.sql.SparkSession$Builder.getOrCreate(SparkSession.scala:958)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.apache.zeppelin.spark.Utils.invokeMethodWithException(Utils.java:60)\n\tat org.apache.zeppelin.spark.Utils.invokeMethodWithException(Utils.java:45)\n\tat org.apache.zeppelin.spark.SparkInterpreter.createSparkSession(SparkInterpreter.java:489)\n\tat org.apache.zeppelin.spark.SparkInterpreter.getSparkSession(SparkInterpreter.java:363)\n\tat org.apache.zeppelin.spark.SparkInterpreter.open(SparkInterpreter.java:1025)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.open(LazyOpenInterpreter.java:74)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:108)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:421)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:195)\n\tat org.apache.zeppelin.scheduler.FIFOScheduler$1.run(FIFOScheduler.java:139)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\nCaused by: java.net.ConnectException: Connection timed out (Connection timed out)\n\tat java.net.PlainSocketImpl.socketConnect(Native Method)\n\tat java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)\n\tat java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)\n\tat java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)\n\tat java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)\n\tat java.net.Socket.connect(Socket.java:589)\n\tat org.apache.thrift.transport.TSocket.open(TSocket.java:221)\n\t... 71 more\n)\n\tat org.apache.hadoop.hive.metastore.HiveMetaStoreClient.open(HiveMetaStoreClient.java:466)\n\tat org.apache.hadoop.hive.metastore.HiveMetaStoreClient.\u003cinit\u003e(HiveMetaStoreClient.java:236)\n\tat org.apache.hadoop.hive.ql.metadata.SessionHiveMetaStoreClient.\u003cinit\u003e(SessionHiveMetaStoreClient.java:74)\n\tat sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)\n\tat sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)\n\tat sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)\n\tat java.lang.reflect.Constructor.newInstance(Constructor.java:423)\n\tat org.apache.hadoop.hive.metastore.MetaStoreUtils.newInstance(MetaStoreUtils.java:1527)\n\tat org.apache.hadoop.hive.metastore.RetryingMetaStoreClient.\u003cinit\u003e(RetryingMetaStoreClient.java:88)\n\tat org.apache.hadoop.hive.metastore.RetryingMetaStoreClient.getProxy(RetryingMetaStoreClient.java:134)\n\tat org.apache.hadoop.hive.metastore.RetryingMetaStoreClient.getProxy(RetryingMetaStoreClient.java:106)\n\tat org.apache.hadoop.hive.ql.metadata.Hive.createMetaStoreClient(Hive.java:4067)\n\tat org.apache.hadoop.hive.ql.metadata.Hive.getMSC(Hive.java:4088)\n\tat org.apache.hadoop.hive.ql.session.SessionState.start(SessionState.java:708)\n\tat org.apache.spark.sql.hive.client.HiveClientImpl.\u003cinit\u003e(HiveClientImpl.scala:193)\n\tat sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)\n\tat sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)\n\tat sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)\n\tat java.lang.reflect.Constructor.newInstance(Constructor.java:423)\n\tat org.apache.spark.sql.hive.client.IsolatedClientLoader.createClient(IsolatedClientLoader.scala:264)\n\tat org.apache.spark.sql.hive.HiveUtils$.newClientForMetadata(HiveUtils.scala:503)\n\tat org.apache.spark.sql.hive.HiveUtils$.newClientForMetadata(HiveUtils.scala:407)\n\tat org.apache.spark.sql.hive.HiveExternalCatalog.client$lzycompute(HiveExternalCatalog.scala:66)\n\tat org.apache.spark.sql.hive.HiveExternalCatalog.client(HiveExternalCatalog.scala:65)\n\tat org.apache.spark.sql.hive.HiveExternalCatalog$$anonfun$databaseExists$1.apply$mcZ$sp(HiveExternalCatalog.scala:194)\n\tat org.apache.spark.sql.hive.HiveExternalCatalog$$anonfun$databaseExists$1.apply(HiveExternalCatalog.scala:194)\n\tat org.apache.spark.sql.hive.HiveExternalCatalog$$anonfun$databaseExists$1.apply(HiveExternalCatalog.scala:194)\n\tat org.apache.spark.sql.hive.HiveExternalCatalog.withClient(HiveExternalCatalog.scala:97)\n\tat org.apache.spark.sql.hive.HiveExternalCatalog.databaseExists(HiveExternalCatalog.scala:193)\n\tat org.apache.spark.sql.internal.SharedState.externalCatalog$lzycompute(SharedState.scala:105)\n\tat org.apache.spark.sql.internal.SharedState.externalCatalog(SharedState.scala:93)\n\tat org.apache.spark.sql.hive.HiveSessionStateBuilder.externalCatalog(HiveSessionStateBuilder.scala:39)\n\tat org.apache.spark.sql.hive.HiveSessionStateBuilder.catalog$lzycompute(HiveSessionStateBuilder.scala:54)\n\tat org.apache.spark.sql.hive.HiveSessionStateBuilder.catalog(HiveSessionStateBuilder.scala:52)\n\tat org.apache.spark.sql.hive.HiveSessionStateBuilder.catalog(HiveSessionStateBuilder.scala:35)\n\tat org.apache.spark.sql.internal.BaseSessionStateBuilder.build(BaseSessionStateBuilder.scala:289)\n\tat org.apache.spark.sql.SparkSession$.org$apache$spark$sql$SparkSession$$instantiateSessionState(SparkSession.scala:1086)\n\tat org.apache.spark.sql.SparkSession$$anonfun$sessionState$2.apply(SparkSession.scala:133)\n\tat org.apache.spark.sql.SparkSession$$anonfun$sessionState$2.apply(SparkSession.scala:133)\n\tat scala.Option.getOrElse(Option.scala:121)\n\tat org.apache.spark.sql.SparkSession.sessionState$lzycompute(SparkSession.scala:132)\n\tat org.apache.spark.sql.SparkSession.sessionState(SparkSession.scala:129)\n\tat org.apache.spark.sql.SparkSession$Builder$$anonfun$getOrCreate$5.apply(SparkSession.scala:958)\n\tat org.apache.spark.sql.SparkSession$Builder$$anonfun$getOrCreate$5.apply(SparkSession.scala:958)\n\tat scala.collection.mutable.HashMap$$anonfun$foreach$1.apply(HashMap.scala:99)\n\tat scala.collection.mutable.HashMap$$anonfun$foreach$1.apply(HashMap.scala:99)\n\tat scala.collection.mutable.HashTable$class.foreachEntry(HashTable.scala:230)\n\tat scala.collection.mutable.HashMap.foreachEntry(HashMap.scala:40)\n\tat scala.collection.mutable.HashMap.foreach(HashMap.scala:99)\n\tat org.apache.spark.sql.SparkSession$Builder.getOrCreate(SparkSession.scala:958)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.apache.zeppelin.spark.Utils.invokeMethodWithException(Utils.java:60)\n\tat org.apache.zeppelin.spark.Utils.invokeMethodWithException(Utils.java:45)\n\tat org.apache.zeppelin.spark.SparkInterpreter.createSparkSession(SparkInterpreter.java:489)\n\tat org.apache.zeppelin.spark.SparkInterpreter.getSparkSession(SparkInterpreter.java:363)\n\tat org.apache.zeppelin.spark.SparkInterpreter.open(SparkInterpreter.java:1025)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.open(LazyOpenInterpreter.java:74)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:108)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:421)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:195)\n\tat org.apache.zeppelin.scheduler.FIFOScheduler$1.run(FIFOScheduler.java:139)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\n"
+      },
+      "dateCreated": "Dec 1, 2017 9:40:21 PM",
+      "dateSubmitted": "Jul 17, 2018 8:36:20 PM",
+      "dateStarted": "Jul 17, 2018 8:36:23 PM",
+      "dateFinished": "Jul 17, 2018 8:49:59 PM",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "// -------- Load input data --------\n\nval bookingEventsUri \u003d s3Uri(omnidataBucket, \"/event/dw_bookings/\").toString\nval pageviewsUri \u003d s3Uri(omnidataBucket, \"/event/pageview/\").toString\n\nval bookingEvents \u003d spark.read.option(\"mergeSchema\", value \u003d true).parquet(bookingEventsUri)\nval visitorKeychains \u003d spark.read.table(\"tier1_omnihub_visitor_graph.keychain_fingerprint\")\nval pageviews \u003d spark.read.parquet(pageviewsUri)\n\nval ProdAccessKey \u003d \"AKIAIYNM5GYJ3QVHWDZQ\"\nval ProdSecretKey \u003d \"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\"\nval EncodedProdSecretKey \u003d java.net.URLEncoder.encode(ProdSecretKey, \"UTF-8\")\nval outputUri \u003d s\"s3a://$ProdAccessKey:$EncodedProdSecretKey@ha-prod-mpss-us-east-1$OutputPath\"",
+      "user": "jomcpherson@homeaway.com",
+      "dateUpdated": "Dec 5, 2017 5:32:50 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1512155936370_-388029035",
+      "id": "20171201-191856_952434779_q_CQYN51J1CG1516752318",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "\nbookingEventsUri: String \u003d s3://ha-prod-omnidata-us-east-1/event/dw_bookings/\n\npageviewsUri: String \u003d s3://ha-prod-omnidata-us-east-1/event/pageview/\n\nbookingEvents: org.apache.spark.sql.DataFrame \u003d [unit_uuid: string, booking_date: date ... 32 more fields]\n\nvisitorKeychains: org.apache.spark.sql.DataFrame \u003d [key_id: string, key_type_id: int ... 15 more fields]\n\npageviews: org.apache.spark.sql.DataFrame \u003d [eventtype: string, unit_uuid: string ... 10 more fields]\n\nProdAccessKey: String \u003d AKIAIYNM5GYJ3QVHWDZQ\n\nProdSecretKey: String \u003d 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\n\nEncodedProdSecretKey: String \u003d KejOtU0qpgOR6EDYXQxQPjKyN5As4albvYkj2JOh\n\noutputUri: String \u003d s3a://AKIAIYNM5GYJ3QVHWDZQ:KejOtU0qpgOR6EDYXQxQPjKyN5As4albvYkj2JOh@ha-prod-mpss-us-east-1/won-lost-bookings/\n"
+      },
+      "dateCreated": "Dec 1, 2017 7:18:56 PM",
+      "dateStarted": "Dec 5, 2017 5:33:45 PM",
+      "dateFinished": "Dec 5, 2017 5:34:27 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val args \u003d Arguments(startDate \u003d LocalDate.now(ZoneOffset.UTC).minusDays(30 * 6))\n\n// -------- Determine start and end date --------\n\nval partitionDates \u003d List[String]()\n\nval continueDate \u003d if (args.continue) findContinueDate(args.startDate, partitionDates) else None\n\nval startDate \u003d continueDate.getOrElse(args.startDate)\nval startDateCompact \u003d startDate.toString.replace(\"-\", \"\")\nval searchDateCompact \u003d startDate.minusDays(SearchDaysBack).toString.replace(\"-\", \"\")\nval searchDateCompactMonths \u003d searchDateCompact.substring(0, 6)\nval endDateCompact \u003d args.endDate.toString.replace(\"-\", \"\")\n\n// -------- Filter, clean, and select data --------\n\nval processedEventDates \u003d if (!args.overwrite) partitionDates.filter(_ \u003e\u003d startDate.toString) else Nil\n\nval bookingEventsFiltered \u003d bookingEvents\n  .filter(\u0027pdateid \u003e\u003d startDateCompact \u0026\u0026 \u0027pdateid \u003c endDateCompact)\n  .filter(\u0027reservation_status_type \u003d\u003d\u003d \"CONFIRMED\")\n  .filter(\u0027known_booking_indicator \u003d\u003d\u003d 1)\n  .filter(\u0027traveler_public_uuid.isNotNull) // Only 2552/2497304 as of 2017-11-30\n  .withColumn(\"event_date\", regexp_replace(\u0027pdateid, \"(\\\\d{4})(\\\\d{2})(\\\\d{2})\", \"$1-$2-$3\"))\n  .filter(!\u0027event_date.isin(processedEventDates: _*))\n  .select(\n    \u0027reservation_uuid as \u0027reservation_id,\n    \u0027unit_uuid as \u0027reservation_unit_uuid,\n    \u0027unit_uri as \u0027reservation_unit_uri,\n    \u0027arrival_date as \u0027reservation_start_date,\n    \u0027departure_date as \u0027reservation_end_date,\n    lower(\u0027traveler_public_uuid) as \u0027traveler_public_uuid,\n    \u0027booking_value_usd,\n    \u0027order_amount,\n    \u0027event_date\n  )\n\nval publicUuidKeychainsFiltered \u003d visitorKeychains\n  .filter(\u0027key_type \u003d\u003d\u003d \"publicUuid\")\n  .filter(\u0027monthid \u003e\u003d searchDateCompactMonths)\n  .select(\n    \u0027key_id as \u0027traveler_public_uuid,\n    \u0027finger_print\n  )\n\nval visitorIdKeychainsFiltered \u003d visitorKeychains\n  .filter(\u0027key_type \u003d\u003d\u003d \"havId\")\n  .filter(\u0027monthid \u003e\u003d searchDateCompactMonths)\n  .select(\n    \u0027key_id as \u0027visitor_id,\n    \u0027finger_print\n  )\n\nval pageviewsFiltered \u003d pageviews\n  .filter(\u0027pdateid \u003e\u003d searchDateCompact)\n  .withColumn(\"pageview_event_date\", regexp_replace(\u0027pdateid, \"(\\\\d{4})(\\\\d{2})(\\\\d{2})\", \"$1-$2-$3\"))\n  .select(\n    \u0027visitorid as \u0027visitor_id,\n    \u0027unit_uuid,\n    \u0027unit_uri,\n    \u0027pageview_event_date\n  )",
+      "user": "jomcpherson@homeaway.com",
+      "dateUpdated": "Dec 5, 2017 5:32:50 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1512157415340_-671044406",
+      "id": "20171201-194335_1937404806_q_CQYN51J1CG1516752318",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "\nargs: Arguments \u003d Arguments(2017-06-08,2017-12-05,false,false)\n\npartitionDates: List[String] \u003d List()\n\ncontinueDate: Option[java.time.LocalDate] \u003d None\n\nstartDate: java.time.LocalDate \u003d 2017-06-08\n\nstartDateCompact: String \u003d 20170608\n\nsearchDateCompact: String \u003d 20170511\n\nsearchDateCompactMonths: String \u003d 201705\n\nendDateCompact: String \u003d 20171205\n\nprocessedEventDates: List[String] \u003d List()\n\nbookingEventsFiltered: org.apache.spark.sql.DataFrame \u003d [reservation_id: string, reservation_unit_uuid: string ... 7 more fields]\n\npublicUuidKeychainsFiltered: org.apache.spark.sql.DataFrame \u003d [traveler_public_uuid: string, finger_print: string]\n\nvisitorIdKeychainsFiltered: org.apache.spark.sql.DataFrame \u003d [visitor_id: string, finger_print: string]\n\npageviewsFiltered: org.apache.spark.sql.DataFrame \u003d [visitor_id: string, unit_uuid: string ... 2 more fields]\n"
+      },
+      "dateCreated": "Dec 1, 2017 7:43:35 PM",
+      "dateStarted": "Dec 5, 2017 5:33:47 PM",
+      "dateFinished": "Dec 5, 2017 5:34:31 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "// -------- Join bookings with visitor keychain --------\n\n// Note: A user may have many public_uuid\u0027s because they can have more than one email.\n// So the associated finger_print may be associated with other public_uuid\u0027s as well.\nval bookingsWithKeychain \u003d bookingEventsFiltered\n  .join(publicUuidKeychainsFiltered, \"traveler_public_uuid\") // Get associated finger_print from public_uuid (1\u003c-\u003e1)\n  .join(visitorIdKeychainsFiltered, \"finger_print\") // Get all associated visitor_id from finger_print (1\u003c-\u003e*)\n  .repartition(10, \u0027visitor_id)",
+      "user": "jomcpherson@homeaway.com",
+      "dateUpdated": "Dec 5, 2017 5:32:50 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1512157817242_-592233299",
+      "id": "20171201-195017_1742745966_q_CQYN51J1CG1516752318",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "\nbookingsWithKeychain: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] \u003d [finger_print: string, traveler_public_uuid: string ... 9 more fields]\n"
+      },
+      "dateCreated": "Dec 1, 2017 7:50:17 PM",
+      "dateStarted": "Dec 5, 2017 5:34:28 PM",
+      "dateFinished": "Dec 5, 2017 5:34:31 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "// -------- Join bookings with pageviews --------\n\nval result \u003d bookingsWithKeychain\n  .join(pageviewsFiltered, \"visitor_id\")\n  .filter(\u0027pageview_event_date \u003c \u0027event_date \u0026\u0026 \u0027pageview_event_date \u003e\u003d date_sub(\u0027event_date, SearchDaysBack))\n  .groupBy(\u0027reservation_id)\n  .agg(\n    first(\u0027event_date) as \u0027event_date,\n    first(\u0027reservation_unit_uuid) as \u0027reservation_unit_uuid,\n    first(\u0027reservation_unit_uri) as \u0027reservation_unit_uri,\n    first(\u0027reservation_start_date) as \u0027reservation_start_date,\n    first(\u0027reservation_end_date) as \u0027reservation_end_date,\n    first(\u0027booking_value_usd) as \u0027booking_value_usd,\n    first(\u0027order_amount) as \u0027order_amount,\n    collect_set(\u0027unit_uri) as \u0027viewed_unit_uri_list\n  )",
+      "user": "jomcpherson@homeaway.com",
+      "dateUpdated": "Dec 5, 2017 5:32:50 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1512157824104_-822682566",
+      "id": "20171201-195024_452250481_q_CQYN51J1CG1516752318",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "\nresult: org.apache.spark.sql.DataFrame \u003d [reservation_id: string, event_date: string ... 7 more fields]\n"
+      },
+      "dateCreated": "Dec 1, 2017 7:50:24 PM",
+      "dateStarted": "Dec 5, 2017 5:34:31 PM",
+      "dateFinished": "Dec 5, 2017 5:34:32 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "spark.sparkContext.hadoopConfiguration.set(\"fs.s3n.awsAccessKeyId\", ProdAccessKey)\nspark.sparkContext.hadoopConfiguration.set(\"fs.s3n.awsSecretAccessKey\", ProdSecretKey)\n\nresult.write.mode(SaveMode.Overwrite).partitionBy(\"event_date\").parquet(\"s3n://AKIAIYNM5GYJ3QVHWDZQ:KejOtU0qpgOR6EDYXQxQPjKyN5As4albvYkj2JOh@ha-prod-mpss-us-east-1/won-lost-bookings/\")\n//.parquet(outputUri.toString)",
+      "user": "jomcpherson@homeaway.com",
+      "dateUpdated": "Dec 5, 2017 5:40:30 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 314.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1512158033577_252380837",
+      "id": "20171201-195353_148656133_q_CQYN51J1CG1516752318",
+      "result": {
+        "code": "ERROR",
+        "type": "TEXT",
+        "msg": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\norg.apache.hadoop.fs.s3.S3Exception: org.jets3t.service.S3ServiceException: S3 Error Message. DELETE \u0027/won-lost-bookings_%24folder%24\u0027 on Host \u0027ha-prod-mpss-us-east-1.s3.amazonaws.com\u0027 @ \u0027Tue, 05 Dec 2017 17:39:46 GMT\u0027 -- ResponseCode: 403, ResponseStatus: Forbidden, XML Error Message: \u003c?xml version\u003d\"1.0\" encoding\u003d\"UTF-8\"?\u003e\u003cError\u003e\u003cCode\u003eAccessDenied\u003c/Code\u003e\u003cMessage\u003eAccess Denied\u003c/Message\u003e\u003cRequestId\u003e1883FA517F4BA9FD\u003c/RequestId\u003e\u003cHostId\u003efLa7iP4SIMBoIKQT3SqllN7wtoBccVebI0rLpw05FzztTbTCBjc/g7nevMJniB46x0aaejEAEYY\u003d\u003c/HostId\u003e\u003c/Error\u003e\n  at org.apache.hadoop.fs.s3native.Jets3tNativeFileSystemStore.delete(Jets3tNativeFileSystemStore.java:328)\n  at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n  at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n  at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n  at java.lang.reflect.Method.invoke(Method.java:497)\n  at org.apache.hadoop.io.retry.RetryInvocationHandler.invokeMethod(RetryInvocationHandler.java:250)\n  at org.apache.hadoop.io.retry.RetryInvocationHandler.invoke(RetryInvocationHandler.java:104)\n  at org.apache.hadoop.fs.s3native.$Proxy27.delete(Unknown Source)\n  at org.apache.hadoop.fs.s3native.NativeS3FileSystem.delete(NativeS3FileSystem.java:864)\n  at org.apache.spark.internal.io.FileCommitProtocol.deleteWithJob(FileCommitProtocol.scala:122)\n  at org.apache.spark.sql.execution.datasources.InsertIntoHadoopFsRelationCommand.deleteMatchingPartitions(InsertIntoHadoopFsRelationCommand.scala:192)\n  at org.apache.spark.sql.execution.datasources.InsertIntoHadoopFsRelationCommand.run(InsertIntoHadoopFsRelationCommand.scala:111)\n  at org.apache.spark.sql.execution.command.ExecutedCommandExec.sideEffectResult$lzycompute(commands.scala:58)\n  at org.apache.spark.sql.execution.command.ExecutedCommandExec.sideEffectResult(commands.scala:56)\n  at org.apache.spark.sql.execution.command.ExecutedCommandExec.doExecute(commands.scala:74)\n  at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:117)\n  at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:117)\n  at org.apache.spark.sql.execution.SparkPlan$$anonfun$executeQuery$1.apply(SparkPlan.scala:138)\n  at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)\n  at org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:135)\n  at org.apache.spark.sql.execution.SparkPlan.execute(SparkPlan.scala:116)\n  at org.apache.spark.sql.execution.QueryExecution.toRdd$lzycompute(QueryExecution.scala:92)\n  at org.apache.spark.sql.execution.QueryExecution.toRdd(QueryExecution.scala:92)\n  at org.apache.spark.sql.execution.datasources.DataSource.writeInFileFormat(DataSource.scala:438)\n  at org.apache.spark.sql.execution.datasources.DataSource.write(DataSource.scala:474)\n  at org.apache.spark.sql.execution.datasources.SaveIntoDataSourceCommand.run(SaveIntoDataSourceCommand.scala:48)\n  at org.apache.spark.sql.execution.command.ExecutedCommandExec.sideEffectResult$lzycompute(commands.scala:58)\n  at org.apache.spark.sql.execution.command.ExecutedCommandExec.sideEffectResult(commands.scala:56)\n  at org.apache.spark.sql.execution.command.ExecutedCommandExec.doExecute(commands.scala:74)\n  at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:117)\n  at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:117)\n  at org.apache.spark.sql.execution.SparkPlan$$anonfun$executeQuery$1.apply(SparkPlan.scala:138)\n  at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)\n  at org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:135)\n  at org.apache.spark.sql.execution.SparkPlan.execute(SparkPlan.scala:116)\n  at org.apache.spark.sql.execution.QueryExecution.toRdd$lzycompute(QueryExecution.scala:92)\n  at org.apache.spark.sql.execution.QueryExecution.toRdd(QueryExecution.scala:92)\n  at org.apache.spark.sql.DataFrameWriter.runCommand(DataFrameWriter.scala:610)\n  at org.apache.spark.sql.DataFrameWriter.save(DataFrameWriter.scala:233)\n  at org.apache.spark.sql.DataFrameWriter.save(DataFrameWriter.scala:217)\n  at org.apache.spark.sql.DataFrameWriter.parquet(DataFrameWriter.scala:509)\n  ... 50 elided\nCaused by: org.jets3t.service.S3ServiceException: S3 Error Message.\n  at org.jets3t.service.S3Service.deleteObject(S3Service.java:2279)\n  at org.apache.hadoop.fs.s3native.Jets3tNativeFileSystemStore.delete(Jets3tNativeFileSystemStore.java:323)\n  ... 90 more\n"
+      },
+      "dateCreated": "Dec 1, 2017 7:53:53 PM",
+      "dateStarted": "Dec 5, 2017 5:39:47 PM",
+      "dateFinished": "Dec 5, 2017 5:39:47 PM",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "",
+      "user": "jomcpherson@homeaway.com",
+      "dateUpdated": "Dec 5, 2017 5:32:50 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1512155820014_-2082214716",
+      "id": "20171201-191700_1320610973_q_CQYN51J1CG1516752318",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": ""
+      },
+      "dateCreated": "Dec 1, 2017 7:17:00 PM",
+      "dateStarted": "Dec 5, 2017 5:34:32 PM",
+      "dateFinished": "Dec 5, 2017 5:34:35 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "test",
+  "id": "CQYN51J1CG1516752318",
+  "angularObjects": {
+    "2CYSFZFVG32501512155123765:shared_process": [],
+    "2D1TF47YA32501512155123760:shared_process": [],
+    "2D255NFNQ32501512155123755:shared_process": [],
+    "2D2T8ZTVB32501512155123731:shared_process": []
+  },
+  "config": {
+    "isDashboard": false
+  },
+  "info": {},
+  "source": "FCN"
+}
