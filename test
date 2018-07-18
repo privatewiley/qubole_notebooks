@@ -1,9 +1,9 @@
 {
   "paragraphs": [
     {
-      "text": "// IMPORTS AND AWS KEYS\nimport org.apache.spark.sql.functions._\nimport spark.sqlContext.implicits._\nimport org.apache.spark.sql.expressions.Window\nimport java.sql.Timestamp\nimport java.time.format.DateTimeFormatter\nimport org.apache.spark.sql.SparkSession\n\nimport org.apache.spark.sql.expressions.Window\nimport org.apache.spark.sql.functions.{when, _}\nimport org.apache.spark.sql._\n\nimport java.time.{Instant, LocalDate, LocalDateTime, ZoneId, ZoneOffset}\nimport java.time.ZonedDateTime\nimport java.time.temporal.ChronoUnit\nimport java.text.SimpleDateFormat\n// blah\nimport org.apache.spark.sql.{DataFrame, SaveMode, SparkSession}",
+      "text": "// IMPORTS AND AWS KEYS\nimport org.apache.spark.sql.functions._\nimport spark.sqlContext.implicits._\nimport org.apache.spark.sql.expressions.Window\nimport java.sql.Timestamp\nimport java.time.format.DateTimeFormatter\nimport org.apache.spark.sql.SparkSession\n\nimport org.apache.spark.sql.expressions.Window\nimport org.apache.spark.sql.functions.{when, _}\nimport org.apache.spark.sql._\n\nimport java.time.{Instant, LocalDate, LocalDateTime, ZoneId, ZoneOffset}\nimport java.time.ZonedDateTime\nimport java.time.temporal.ChronoUnit\nimport java.text.SimpleDateFormat\n// blah blah\nimport org.apache.spark.sql.{DataFrame, SaveMode, SparkSession}",
       "user": "yooslee@homeaway.com",
-      "dateUpdated": "Jul 18, 2018 11:42:34 PM",
+      "dateUpdated": "Jul 18, 2018 11:43:04 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
